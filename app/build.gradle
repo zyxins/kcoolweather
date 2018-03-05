@@ -24,10 +24,37 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'org.litepal.android:core:1.6.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+
+    implementation 'com.android.support:support-v4:26.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+
+def createDir = {
+    path ->
+        File dir = new File(path)
+        if (!dir.exists()) {
+            dir.mkdirs()
+        }
+}
+
+task makeJavaDir() {
+    def paths = ['app/src/main/java/com/zeronesky/kcoolweather/db',
+                 'app/src/main/java/com/zeronesky/kcoolweather/gson',
+                 'app/src/main/java/com/zeronesky/kcoolweather/service',
+                 'app/src/main/java/com/zeronesky/kcoolweather/util',
+                 'app/src/main/assets'
+    ]
+    doFirst {
+        paths.forEach(createDir)
+    }
 }
